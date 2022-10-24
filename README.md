@@ -1,0 +1,2 @@
+# SpacePhotoRevamp
+The SpacePhoto app was a walkthrough assignment from the OSU Swift course curriculum. It fetches and displays NASA's astronomy picture of the day alongside some additional information about the image. This new version was created in SwiftUI, utilizes the Combine framework, and uses an MVVM architecture. The UI has received some minor QOL updates but is relatively unchanged from the initial assignment instructions.
