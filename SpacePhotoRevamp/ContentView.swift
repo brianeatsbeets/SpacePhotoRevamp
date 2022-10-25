@@ -29,16 +29,25 @@ struct ContentView: View {
             if viewModel.didReceiveData {
                 VStack {
                     
-                    // Display image and copyright
-                    ZStack(alignment: .bottomLeading) {
-                        Image(uiImage: viewModel.photo!)
-                            .resizable()
-                            .scaledToFit()
-                        Text(viewModel.copyright)
-                            .font(.caption)
-                            .padding(4)
-                            .foregroundColor(.white)
-                            .background(.black)
+                    // Create Web View if media type is video
+                    if viewModel.mediaType == "video" {
+                        VStack {
+                            WebView(url: viewModel.videoURL!)
+                            Text(viewModel.copyright)
+                        }
+                    } else if viewModel.mediaType == "image" {
+                        
+                        // Display image and copyright
+                        ZStack(alignment: .bottomLeading) {
+                            Image(uiImage: viewModel.photo!)
+                                .resizable()
+                                .scaledToFit()
+                            Text(viewModel.copyright)
+                                .font(.caption)
+                                .padding(4)
+                                .foregroundColor(.white)
+                                .background(.black)
+                        }
                     }
                     
                     // Display description header and text

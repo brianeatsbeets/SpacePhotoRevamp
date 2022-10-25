@@ -43,7 +43,7 @@ class PhotoInfoFetcher {
     }
     
     // Fetch the photo
-    func fetchImage(from url: URL) -> AnyPublisher<UIImage, PhotoInfoError> {
+    func fetchImage(from url: URL) -> AnyPublisher<UIImage?, PhotoInfoError> {
         
         // Return a publisher for the photo
         return URLSession.shared.dataTaskPublisher(for: url)
@@ -56,13 +56,9 @@ class PhotoInfoFetcher {
                 return response.data
             }
         
-            // Attempt to map the response data to the desired data type and map potential errors to PhotoInfoErrors
-            .tryMap { data in
-                guard let image = UIImage(data: data) else {
-                    throw PhotoInfoError.imageData
-                }
-                
-                return image
+            // Map the response data to the desired data type and map potential errors to PhotoInfoErrors
+            .map { data in
+                return UIImage(data: data)
             }
             .mapError { PhotoInfoError.map($0) }
         

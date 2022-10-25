@@ -19,6 +19,7 @@ struct PhotoInfoResponse: Codable {
     var description: String
     var url: URL
     var copyright: String?
+    var mediaType: String
     
     // Specify coding keys for custom API property keys
     enum CodingKeys: String, CodingKey {
@@ -26,6 +27,7 @@ struct PhotoInfoResponse: Codable {
         case description = "explanation"
         case url
         case copyright
+        case mediaType = "media_type"
     }
     
     // MARK: - Initializer
@@ -37,5 +39,6 @@ struct PhotoInfoResponse: Codable {
         description = try values.decode(String.self, forKey: CodingKeys.description)
         url = try values.decode(URL.self, forKey: CodingKeys.url)
         copyright = try values.decode(String.self, forKey: CodingKeys.copyright)
+        mediaType = try values.decode(String.self, forKey: CodingKeys.mediaType)
     }
 }
